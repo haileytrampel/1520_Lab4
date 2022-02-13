@@ -58,6 +58,7 @@ var numberOfCardsOpened = 0;
 var firstCardSelectedSrc;
 var firstCardSelected;
 var attempts = 0;
+var numCards = 24;
 
 // this function is called everytime the player clicks on the top of a card
 function check_selection(selectedCard) {
@@ -90,6 +91,11 @@ function check_selection(selectedCard) {
                     imageElement.src = "images/empty_image.png";
                     numberOfCardsOpened = 0;
                     firstCardSelected = "";
+                    numCards = numCards - 2;
+                    console.log(numCards);
+                    if (numCards == 0){
+                        resetGame();
+                    }
                 }, 500);
             } else {
                 // if they do not have the same picture, wait 0.5 seconds and
@@ -107,4 +113,12 @@ function check_selection(selectedCard) {
         const element = document.getElementById("numberOfTrials");
         element.innerHTML = attempts;
     }
+}
+function resetGame() {
+    const resetDiv = document.getElementById("reset"); 
+
+    const btn = document.createElement("button");
+    btn.innerHTML = "Play Again";
+    btn.onclick = function(){window.location.reload()};
+    resetDiv.appendChild(btn);
 }
